@@ -16,10 +16,14 @@ body {
   font-family: 'Georgia', serif;
   padding: 24px;
 }
+@media (max-width: 480px) {
+  body { padding: 0; }
+}
 
 .card {
   position: relative;
-  width: 720px;
+  width: 100%;
+  max-width: 720px;
   background: #f5ede0;
   border-radius: 6px;
   overflow: hidden;
@@ -33,6 +37,13 @@ body {
   align-items: center;
   gap: 14px;
   border-bottom: 2px solid #c8860a;
+  flex-wrap: wrap;
+}
+@media (max-width: 480px) {
+  .header { padding: 10px 14px; gap: 8px; }
+  .header-title { font-size: 0.9rem; }
+  .header-tag { font-size: 0.55rem; }
+  .chip { font-size: 0.5rem; padding: 2px 6px; }
 }
 .chip {
   font-size: 0.6rem;
@@ -111,11 +122,14 @@ body {
   border-top: 2px solid #c8860a;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.35s ease, padding 0.3s ease;
+  transition: max-height 0.45s ease, padding 0.3s ease;
 }
 .detail-panel.open {
-  max-height: 220px;
+  max-height: 500px;
   padding: 18px 24px;
+}
+@media (max-width: 480px) {
+  .detail-panel.open { padding: 14px 16px; }
 }
 .detail-inner { display: flex; gap: 16px; align-items: flex-start; }
 .detail-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
@@ -124,6 +138,12 @@ body {
 .detail-desc { font-size: 0.8rem; color: #a08050; line-height: 1.6; max-width: 580px; }
 .detail-close { margin-left: auto; cursor: pointer; color: #6b4f1a; font-size: 1.2rem; flex-shrink: 0; transition: color 0.2s; padding: 0 4px; align-self: flex-start; }
 .detail-close:hover { color: #c8860a; }
+@media (max-width: 480px) {
+  .detail-desc { font-size: 0.75rem; line-height: 1.5; max-width: 100%; }
+  .detail-title { font-size: 0.9rem; }
+  .detail-role { font-size: 0.55rem; }
+  .detail-close { font-size: 1.4rem; padding: 4px 8px; }
+}
 
 .legend {
   background: #2c1e0a;
@@ -137,6 +157,11 @@ body {
   display: flex; align-items: center; gap: 7px;
   flex: 1; min-width: 130px; padding: 4px 0;
   cursor: pointer; opacity: 0.75; transition: opacity 0.2s;
+}
+@media (max-width: 480px) {
+  .legend { padding: 10px 14px; gap: 4px; }
+  .legend-item { min-width: 110px; flex: 0 0 48%; }
+  .legend-text { font-size: 0.62rem; }
 }
 .legend-item:hover, .legend-item.active { opacity: 1; }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
