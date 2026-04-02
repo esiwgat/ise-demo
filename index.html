@@ -178,6 +178,37 @@ body {
 .legend-item:hover, .legend-item.active { opacity: 1; }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 .legend-text { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: #c8a870; font-weight: bold; }
+
+.tap-hint {
+  display: none;
+  text-align: center;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #6b4f1a;
+  padding: 8px 14px;
+  background: #2c1e0a;
+  border-top: 1px solid #3a2a10;
+}
+@media (max-width: 480px) {
+  .tap-hint { display: block; }
+  .legend-item {
+    background: rgba(200,134,10,0.08);
+    border: 1px solid rgba(200,134,10,0.2);
+    border-radius: 6px;
+    padding: 8px 10px;
+    -webkit-tap-highlight-color: rgba(200,134,10,0.15);
+  }
+  .legend-item.active {
+    background: rgba(200,134,10,0.18);
+    border-color: #c8860a;
+  }
+}
+@keyframes tap-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.tap-hint span { animation: tap-pulse 2.5s ease-in-out infinite; }
 </style>
 </head>
 <body>
@@ -186,7 +217,8 @@ body {
   <div class="header">
     <div class="header-chips">
       <span class="chip">M2 · L06</span>
-      <span class="chip">ISE · Wildtrack</span>
+      <span class="chip">ISE</span>
+      <span class="chip">Wildtrack</span>
     </div>
     <div class="header-text">
       <div class="header-tag">Modul 2 · §9 JuSchG · §10 JuSchG · §1 JuSchG · §35 SGB VIII</div>
@@ -340,6 +372,8 @@ body {
     </svg>
   </div>
 
+  <div class="tap-hint" id="tapHint"><span>Tippe auf die Bereiche im Bild oder die Legende</span></div>
+
   <div class="detail-panel" id="detailPanel">
     <div class="detail-inner">
       <div class="detail-dot" id="detailDot"></div>
@@ -410,6 +444,8 @@ let active = null;
 function openDetail(key) {
   const r = ROLES[key];
   if (!r) return;
+  const hint = document.getElementById('tapHint');
+  if (hint) hint.style.display = 'none';
   document.getElementById('detailDot').style.background = r.color;
   document.getElementById('detailRole').textContent = r.role;
   document.getElementById('detailTitle').textContent = r.title;
